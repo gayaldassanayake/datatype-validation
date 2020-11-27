@@ -1,0 +1,6 @@
+datatype_validation_ballerina/target
+datatype_validation_ballerina/src/validation/resources/*
+!datatype_validation_ballerina/src/validation/resources/.gitkeep
+
+data_type_validation_java/src/com/resources/*
+data_type_validation_java/out/*
