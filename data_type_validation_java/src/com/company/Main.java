@@ -3,8 +3,6 @@ package com.company;
 import oracle.jdbc.OracleConnection;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -24,12 +22,12 @@ public class Main {
 //            insdata.insert();
 
             SelectData selData = new SelectData(conn, oraConn);
-//            selData.select();
+            selData.select();
 
             Procedure procedure = new Procedure(conn, oraConn);
-            procedure.executeAllProcedures();
+//            procedure.executeAllProcedures();
 
-        } catch (SQLException | URISyntaxException | MalformedURLException throwables) {
+        } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
         }
     }

@@ -1,11 +1,15 @@
 package com.company;
+
 import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.sql.CHAR;
 import oracle.sql.STRUCT;
 import oracle.sql.StructDescriptor;
-//import oracle.spatial.geometry.JGeometry;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.sql.*;
 
 public class InsertData {
@@ -155,12 +159,29 @@ public class InsertData {
         pstmt.executeUpdate();
     }
 
-    public void insert() throws SQLException {
-        insertTime();
-        insertBFile();
-        insertRowId();
-        insertObject();
-        insertVarray();
-        insertAnydata();
+    public void InsertXML() throws SQLException, MalformedURLException {
+        String insertQuery = "insert into XMLTYPES(COL_XMLTYPE, COL_HTTPURITYPE) values (?, ?)";
+        String xmlparam = "<PO><PONO>200</PONO><PNAME>PO_2</PNAME></PO>";
+        String dburi = "<HR><DBTAB><ROW><A>...data_in_column_A...</A></ROW></DBTAB></HR>";
+        String httpuri = "https://www.geeksforgeeks.org/url-class-java-examples/";
+
+        URL httpuriparam = URI.create(httpuri).toURL();
+
+        OraclePreparedStatement pstmt = (OraclePreparedStatement) conn.prepareStatement(insertQuery);
+
+        pstmt.setString(1, xmlparam);
+        pstmt.setURL(2, httpuriparam);
+
+        pstmt.execute();
+    }
+
+    public void insert() throws SQLException, MalformedURLException {
+//        insertTime();
+//        insertBFile();
+//        insertRowId();
+//        insertObject();
+//        insertVarray();
+//        insertAnydata();
+        InsertXML();
     }
 }

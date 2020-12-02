@@ -39,6 +39,7 @@ function refSelect(jdbc:Client jdbcClient){
 }
 
 function characterSelect(jdbc:Client jdbcClient){
+
     stream<record{} | error> resultStream = jdbcClient->query("select * from CHARACTER", CharacterRecord);
     stream<CharacterRecord, sql:Error> characterStream = <stream<CharacterRecord, sql:Error>> resultStream;
     error? e = characterStream.forEach(function(CharacterRecord character) {
@@ -53,8 +54,26 @@ function characterSelect(jdbc:Client jdbcClient){
     } 
 }
 
+type StupidRec record {|
+    sql:TimeValue name; 
+|};
+
 function datetimeSelect(jdbc:Client jdbcClient){
+    // stream<record{} , error> resultStream = jdbcClient->query("select * from DATETIME");
+
+    // error? e = resultStream.forEach(function(record {} result){
+    //     sql:TimestampValue = check <sql:TimestampValue>result["COL_TIMESTAMP"];
+    //         // io:println(result);
+    // });
+    
+
     stream<record{} | error> resultStream = jdbcClient->query("select * from DATETIME", DatetimeRecord);
+    // stream<StupidRec, sql:Error> sr = <stream<StupidRec, sql:Error>> resultStream;
+    // error? e = resultStream.forEach(function(record {| anydata...; |}|error s){
+    //     io:println("s");
+    // });
+    // io:println(length(sr));
+
     stream<DatetimeRecord, sql:Error> datetimeStream = <stream<DatetimeRecord, sql:Error>> resultStream;
     string timeFormat = "yyyy-MM-dd HH:mm:ss.SSZ";
 

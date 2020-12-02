@@ -2,10 +2,8 @@ package com.company;
 
 import oracle.jdbc.*;
 import oracle.sql.*;
-import oracle.xdb.XMLType;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.*;
@@ -263,9 +261,6 @@ public class Procedure {
         call.execute();
 
     }
-
-
-
 
     public void executeAllProcedures() throws SQLException, URISyntaxException, MalformedURLException {
 //        timeProc();

@@ -99,7 +99,7 @@ function varrayInsert(jdbc:Client jdbcClient) returns sql:Error?{
     sql:ArrayValue intarr = new(col_vvcarr);
     sql:ArrayValue stringarr = new(col_numarr);
     sql:ParameterizedQuery insertQuery = 
-             `insert into varraytable( COL_NUMARR)
+             `insert into varraytable(COL_NUMARR)
                 values(${intarr})`;
     sql:ExecutionResult| sql:Error result = check jdbcClient->execute(insertQuery);
    
@@ -386,11 +386,11 @@ function insertToAllTables(jdbc:Client jdbcClient){
     // err = anytypeInsert(jdbcClient);
     // printDataInsertResult("ANYTYPE", err);
 
-    err = xmltypeInsert(jdbcClient);
-    printDataInsertResult("XMLTYPES", err);
+    // err = xmltypeInsert(jdbcClient);
+    // printDataInsertResult("XMLTYPES", err);
 
-    // err = varrayInsert(jdbcClient);
-    // printDataInsertResult("VARRAY", err);
+    err = varrayInsert(jdbcClient);
+    printDataInsertResult("VARRAY", err);
 
     // err = nestedTableInsert(jdbcClient);
     // printDataInsertResult("NESTEDTABLE", err);

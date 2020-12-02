@@ -50,9 +50,12 @@ function executeDatetimeProcedure(jdbc:Client jdbcClient) returns error?{
     io:println("\n------------------------------------");
     io:println("Datetime Procedure Execution Started!\n");
 
+    io:println(TIMESTAMP_IN, TIMESTAMPTZ_IN);
+    
     sql:ParameterizedCallQuery query = `CALL DATETIMEPROC(   
         ${DATETIME_IN}, ${DATETIME_INOUT}, ${DATETIME_OUT},
         ${TIMESTAMP_IN}, ${TIMESTAMP_INOUT}, ${TIMESTAMP_OUT},
+        ${TIMESTAMPTZ_IN},
         ${INTERVALY2M_IN}, ${INTERVALY2M_INOUT}, ${INTERVALY2M_OUT},
         ${INTERVALD2S_IN}, ${INTERVALD2S_INOUT}, ${INTERVALD2S_OUT}
         )`;
@@ -320,8 +323,8 @@ function executeAllProcedures(jdbc:Client jdbcClient) returns error?{
     // err = executeCharacterProcedure(jdbcClient);
     // printExecuteProcedureResult("CHARACTER", err);
 
-    // err = executeDatetimeProcedure(jdbcClient);
-    // printExecuteProcedureResult("DATETIME", err);
+    err = executeDatetimeProcedure(jdbcClient);
+    printExecuteProcedureResult("DATETIME", err);
 
     // err = executeBLOBProcedure(jdbcClient);
     // printExecuteProcedureResult("BLOB", err);
@@ -332,8 +335,8 @@ function executeAllProcedures(jdbc:Client jdbcClient) returns error?{
     // err = executeNCLOBProcedure(jdbcClient);
     // printExecuteProcedureResult("NCLOB", err);
 
-    err = executeLongProcedure(jdbcClient);
-    printExecuteProcedureResult("LONG", err);
+    // err = executeLongProcedure(jdbcClient);
+    // printExecuteProcedureResult("LONG", err);
 
     // err = executeRawProcedure(jdbcClient);
     // printExecuteProcedureResult("RAW", err);

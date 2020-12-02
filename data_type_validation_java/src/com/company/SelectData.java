@@ -1,18 +1,15 @@
 package com.company;
 
 import oracle.jdbc.OracleConnection;
-import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-import oracle.sql.*;
-//import oracle.spatial.geometry.JGeometry;
+import oracle.sql.ANYDATA;
+import oracle.sql.Datum;
+import oracle.sql.NUMBER;
+import oracle.sql.TypeDescriptor;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.Properties;
-
-import static oracle.jdbc.OracleType.VARCHAR2;
 
 public class SelectData {
     private Connection conn;
@@ -173,14 +170,35 @@ public class SelectData {
 //        JGeometry circle = JGeometry.createCircle(10.0, 5.0, 4.0,1);
 //    }
 
+    private void xmlSelect() throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rs =  stmt.executeQuery("SELECT x.COL_XMLTYPE.getStringVal(), x.COL_HTTPURITYPE.getUrl(), x.COL_DBURITYPE.getClob(), x.COL_XDBURITYPE.getClob(), x.COL_URI_TYPE.getClob() FROM XMLTYPES x");
+        OracleResultSet orset = (OracleResultSet) rs;
+        while (rs.next()){
+            String xml = rs.getString(1);
+            String httpurl = rs.getString(2);
+            String dburi = rs.getString(3);
+            String xdburi = rs.getString(4);
+            String uri = rs.getString(5);
+
+            System.out.println(xml);
+            System.out.println(httpurl);
+            System.out.println(dburi);
+            System.out.println(xdburi);
+            System.out.println(uri);
+
+        }
+    }
+
 
     public void select() throws SQLException, IOException {
-        selectTime();
-        selectBFile();
-        selectRowId();
-        objectSelect();
-        refSelect();
-        varraySelect();
-        anyDataSelect();
+//        selectTime();
+//        selectBFile();
+//        selectRowId();
+//        objectSelect();
+//        refSelect();
+//        varraySelect();
+//        anyDataSelect();
+        xmlSelect();
     }
 }

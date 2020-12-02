@@ -119,6 +119,7 @@ type anyRecord record {|
     string type_name3;
 |};
 
+
 type xmlRecord record {|
     int pk;
     string col_xmltype;
